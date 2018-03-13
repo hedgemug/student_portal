@@ -80,13 +80,39 @@ var ProfilePage = {
   }
 };
 
+var ResumeShowPage = {
+  template: "#resume-show-page",
+  data: function() {
+    return {
+      educations: [],
+      experiences: [],
+      skills: []
+    };
+  }, 
+  created: function() {
+    axios.get("/educations").then(function(response) {
+          console.log(response.data);
+          this.educations = response.data;
 
+    }.bind(this));
+    axios.get("/experiences").then(function(response) {
+          console.log(response.data);
+          this.experiences = response.data;
+
+    }.bind(this));
+    axios.get("/skills").then(function(response) {
+          console.log(response.data);
+          this.skills = response.data;
+
+    }.bind(this));
+  }
+}
 
 var router = new VueRouter({
   routes: [
    { path: "/login", component: LoginPage },
-   { path: "/profile", component: ProfilePage }
-
+   { path: "/profile", component: ProfilePage },
+   { path: "/resume", component: ResumeShowPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
