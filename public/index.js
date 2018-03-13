@@ -86,7 +86,8 @@ var ResumeShowPage = {
     return {
       educations: [],
       experiences: [],
-      skills: []
+      skills: [],
+      errors: []
     };
   }, 
   created: function() {
