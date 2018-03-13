@@ -27,6 +27,10 @@
             <li class="nav-item active">
               <a class="dropdown-item" href="/#/login">Login</a>
             </li>
+             <li class="nav-item active">
+              <a class="dropdown-item" href="/#/capstones/:id">Show Capstone</a>
+            </li>
+
           </ul>
         </div>
       </nav>
@@ -70,5 +74,21 @@
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
+  </div>
+</template>
+
+<template id="capstones-show-page">
+  <div class="vue-component">
+    
+    <h2>{{ capstone.title }}</h2>
+    <h2>{{ capstone.description }}</h2>
+   <!--  <img :src="capstone.url" alt=""> -->
+    <h2>{{ capstone.url }}</h2>
+  
+    <img  :src="capstone.photo[0]" alt="Card image cap"> 
+     <h2>{{ capstone.student_id }}</h2>
+
+     <a href="/#/">Back to all capstones</a>
+   
   </div>
 </template>
