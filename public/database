@@ -1,0 +1,16 @@
+{
+ "students": {
+    "first_name": "Drew",
+    "last_name": "Pilgrim",
+    "email": "drew@gmail.com",
+    "password_digest": "???",
+    phone_number: "7777777",
+    short_bio: "Is a human",
+    linkedin_url: "https://www.linkedin.com/in/drew-pilgrim/",
+    twitter_handle: "https://twitter.com/",
+    personal_blog: "https://google.com",
+    online_resume: "https://resume.com",
+    github_url:  "https://github.com/drewpilgrim",
+    photo: "http://moziru.com/images/human-clipart-3d-human-17.jpg"
+  } 
+}
