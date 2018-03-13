@@ -74,6 +74,53 @@
   </div>
 </template>
 
+<template id="profile-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Login</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Student Data:</label>
+      </div>
+      <ul>
+        <img id="photo" v-for="key in Object.keys(currentStudent)" v-if="!output(key)" :src="currentStudent[key]" height="100" width="100" >
+        <li v-if="output(key)" v-for="key in Object.keys(currentStudent)"> {{key + ": " + currentStudent[key]}}</li>
+      </ul>
+      </p>
+    </div>
+   <a class="btn btn-primary" data-toggle="modal" data-target="#studentUpdateModal">Update</a>
+
+
+     <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ currentStudent.first_name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" v-for="key in Object.keys(currentStudent)">
+            <div class="form-group">
+              <label>{{key + ": "}}</label> 
+              <input type="string" class="form-control" v-model="currentStudent[key]">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="update()" class="btn btn-secondary">Update</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <template id="resume-show-page">
   <div vlass="vue-component">
     <h1>Resume</h1>
