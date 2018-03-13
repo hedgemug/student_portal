@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   get '/teams' => 'teams#index'
-  get '/students' => 'databases#index'
+  get '/students' => 'students#index'
   get '/experiences' => 'experiences#index'
   get '/skills' => 'skills#index'
-  get '/education' => 'educations#index'
+  get '/educations' => 'educations#index'
   get '/capstones' => 'capstones#index'
 
 end

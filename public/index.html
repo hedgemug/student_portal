@@ -7,10 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="recipes.css">
 
-    <title>Recipes Index</title>
+    <title>User Data</title>
   </head>
 
   <body>
@@ -18,7 +16,7 @@
     <div id="vue-app">
       
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Cookbook</a>
+        <a class="navbar-brand" href="#">Student Data</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,6 +24,9 @@
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="dropdown-item" href="/#/login">Login</a>
+            </li>
+            <li class="nav-item active">
+              <a class="dropdown-item" href="/#/resume">Resume</a>
             </li>
           </ul>
         </div>
@@ -70,5 +71,27 @@
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
+  </div>
+</template>
+
+<template id="resume-show-page">
+  <div vlass="vue-component">
+    <h1>Resume</h1>
+    <h3>Education</h3>
+    <div v-for="education in educations">
+      <p>School: {{ education.school }}</p>
+      <p>Degree: {{ education.degree }}</p>
+      <br>
+    </div>
+    <h3>Experiences</h3>
+    <div v-for="experience in experiences">
+      <p>{{experience.title }}</p>
+      <p>{{experience.company }}</p>
+      <p>{{experience.details }}</p>
+    </div>
+    <h3>Skills</h3>
+    <div v-for="skill in skills">
+      <p>{{ skill.skill_name }}</p>
+    </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
-class DatabasesController < ApplicationController
-  def index
+class StudentsController < ApplicationController
+    def index
     render json: 
       [
         {
