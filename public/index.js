@@ -40,6 +40,10 @@ var ProfilePage = {
   data: function() {
     return {
       currentStudent: {user_name: "Hello"},
+      educations: [],
+      experiences: [],
+      skills: [],
+
       errors: []
     };
   },
@@ -54,8 +58,21 @@ var ProfilePage = {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
-      function data(){ 
-      }
+      axios.get("/educations").then(function(response) {
+            console.log(response.data);
+            this.educations = response.data;
+
+      }.bind(this));
+      axios.get("/experiences").then(function(response) {
+            console.log(response.data);
+            this.experiences = response.data;
+
+      }.bind(this));
+      axios.get("/skills").then(function(response) {
+            console.log(response.data);
+            this.skills = response.data;
+
+      }.bind(this));
   },
   methods: {
     update: function() {
@@ -84,28 +101,11 @@ var ResumeShowPage = {
   template: "#resume-show-page",
   data: function() {
     return {
-      educations: [],
-      experiences: [],
-      skills: [],
       errors: []
     };
   }, 
   created: function() {
-    axios.get("/educations").then(function(response) {
-          console.log(response.data);
-          this.educations = response.data;
 
-    }.bind(this));
-    axios.get("/experiences").then(function(response) {
-          console.log(response.data);
-          this.experiences = response.data;
-
-    }.bind(this));
-    axios.get("/skills").then(function(response) {
-          console.log(response.data);
-          this.skills = response.data;
-
-    }.bind(this));
   }
 }
 
