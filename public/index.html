@@ -99,21 +99,24 @@
       <p>Degree: {{ education.degree }}</p>
       <br>
     </div>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#educationsUpdateModal">Update Educations</a>
     <h3>Experiences</h3>
     <div v-for="experience in experiences">
       <p>{{experience.title }}</p>
       <p>{{experience.company }}</p>
       <p>{{experience.details }}</p>
     </div>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#experiencesUpdateModal">Update Experiences</a>
     <h3>Skills</h3>
     <div v-for="skill in skills">
       <p>{{ skill.skill_name }}</p>
     </div>
     </div>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#skillsUpdateModal">Update Skills</a>
     <a class="btn btn-primary" data-toggle="modal" data-target="#resumeUpdateModal">Update Resume Data</a>
 
-
-     <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Student Info Update -->
+    <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -138,7 +141,22 @@
       </div>
     </div>
 
+    <!-- Resume Update -->
     <div class="modal fade" id="resumeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ currentStudent.first_name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Update Modal -->
+    <div class="modal fade" id="educationsUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -156,6 +174,26 @@
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="updateResume()" class="btn btn-secondary">Update</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experiences Update Modal -->
+    <div class="modal fade" id="experiencesUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ currentStudent.first_name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div v-for="experience in experiences">
             <p>Experience</p>
             <div class="modal-body" v-for="key in Object.keys(experience)">
@@ -164,6 +202,26 @@
                 <input type="string" class="form-control" v-model="experience[key]">
               </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="updateResume()" class="btn btn-secondary">Update</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Update Modal -->
+    <div class="modal fade" id="skillsUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ currentStudent.first_name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div v-for="skill in skills">
             <p>Skill</p>
@@ -182,28 +240,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</template>
-
-<template id="resume-show-page">
-  <div vlass="vue-component">
-    <h1>Resume</h1>
-    <h3>Education</h3>
-    <div v-for="education in educations">
-      <p>School: {{ education.school }}</p>
-      <p>Degree: {{ education.degree }}</p>
-      <br>
-    </div>
-    <h3>Experiences</h3>
-    <div v-for="experience in experiences">
-      <p>{{experience.title }}</p>
-      <p>{{experience.company }}</p>
-      <p>{{experience.details }}</p>
-    </div>
-    <h3>Skills</h3>
-    <div v-for="skill in skills">
-      <p>{{ skill.skill_name }}</p>
     </div>
   </div>
 </template>
