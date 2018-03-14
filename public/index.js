@@ -35,6 +35,21 @@ var LoginPage = {
   }
 };
 
+var CapstoneShowPage = {
+  template: "#capstones-show-page",
+  data: function() {
+    return {
+      capstone: {}
+    };
+  },
+  created: function() {
+    axios.get("/capstones/" + this.$route.params.id).then(function(response) {
+      console.log(response.data);
+      this.capstone = response.data;
+    }.bind(this));
+  }
+}
+
 var ProfilePage = {
   template: "#profile-page",
   data: function() {
@@ -173,10 +188,22 @@ var ProfilePage = {
   }
 };
 
+
+
+
 var router = new VueRouter({
   routes: [
    { path: "/login", component: LoginPage },
-   { path: "/profile", component: ProfilePage }  ],
+
+   { path: "/capstones/:id", component: CapstoneShowPage },
+
+   { path: "/profile", component: ProfilePage }
+
+
+  ],
+
+
+
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
   }

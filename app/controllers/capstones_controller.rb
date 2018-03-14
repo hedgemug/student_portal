@@ -24,4 +24,18 @@ class CapstonesController < ApplicationController
       ] 
 
   end
+  
+  def show
+    render json: 
+    
+      {
+          title: "Nutritional Advocate",
+          description: "Nutritional helper",
+          url: "www.google.com",
+          photo: "???",
+          student_id: 1
+        }
+    
+  end
+
 end
