@@ -48,12 +48,17 @@ var ProfilePage = {
       // Add Models
       newSkillName: "",
 
-      newEducationStartDate: "",
-      newEducationEndDate: "",
+      newEducationStartDate: null,
+      newEducationEndDate: null,
       newEducationDegree: "",
       newEducationSchool: "",
 
 
+      newExperienceStartDate: null ,
+      newExperienceEndDate: null,
+      newExperienceTitle: "",
+      newExperienceCompany: "",
+      newExperienceDetails: "",
 
       errors: []
     };
@@ -73,17 +78,29 @@ var ProfilePage = {
             console.log(response.data);
             this.educations = response.data;
 
-      }.bind(this));
+      }.bind(this)).catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
       axios.get("/experiences").then(function(response) {
             console.log(response.data);
             this.experiences = response.data;
 
-      }.bind(this));
+      }.bind(this)).catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
       axios.get("/skills").then(function(response) {
             console.log(response.data);
             this.skills = response.data;
 
-      }.bind(this));
+      }.bind(this)).catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
   },
   methods: {
     update: function() {
@@ -129,28 +146,30 @@ var ProfilePage = {
       }.bind(this)).catch(function(error){
         this.erorrs = error.response.data.errors;
       }.bind(this));
+    },
+    newExperience: function(){
+      params = {
+        start_date: this.newExperienceStartDate,
+        end_date: this.newExperienceEndDate,
+        title: this.newExperienceTitle,
+        details: this.newExperienceDetails,
+        company: this.newExperienceCompany,
+        student_id: this.currentStudent.id,
+
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
     }
   }
 };
 
-var ResumeShowPage = {
-  template: "#resume-show-page",
-  data: function() {
-    return {
-      errors: []
-    };
-  }, 
-  created: function() {
-
-  }
-}
-
 var router = new VueRouter({
   routes: [
    { path: "/login", component: LoginPage },
-   { path: "/profile", component: ProfilePage },
-   { path: "/resume", component: ResumeShowPage }
-  ],
+   { path: "/profile", component: ProfilePage }  ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
