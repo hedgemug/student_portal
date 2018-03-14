@@ -92,7 +92,6 @@ var ProfilePage = {
       axios.get("/educations").then(function(response) {
             console.log(response.data);
             this.educations = response.data;
-
       }.bind(this)).catch(
           function(error) {
             this.errors = error.response.data.errors;
@@ -163,7 +162,7 @@ var ProfilePage = {
         school: this.newEducationSchool,
         student_id: this.currentStudent.id
       }
-      axios.post("/skills", params).then(function(response){
+      axios.post("/educations", params).then(function(response){
 
       }.bind(this)).catch(function(error){
         this.erorrs = error.response.data.errors;
@@ -179,7 +178,7 @@ var ProfilePage = {
         student_id: this.currentStudent.id,
 
       }
-      axios.post("/skills", params).then(function(response){
+      axios.post("/experiences", params).then(function(response){
 
       }.bind(this)).catch(function(error){
         this.erorrs = error.response.data.errors;
@@ -188,18 +187,12 @@ var ProfilePage = {
   }
 };
 
-
-
-
 var router = new VueRouter({
   routes: [
    { path: "/login", component: LoginPage },
    { path: "/capstones/:id", component: CapstoneShowPage },
    { path: "/profile", component: ProfilePage }
   ],
-
-
-
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
