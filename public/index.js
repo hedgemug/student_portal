@@ -54,10 +54,27 @@ var ProfilePage = {
   template: "#profile-page",
   data: function() {
     return {
+      // Display Models
       currentStudent: {user_name: "Hello"},
       educations: [],
       experiences: [],
       skills: [],
+
+      // Add Models
+      newSkillName: "",
+
+      newEducationStartDate: null,
+      newEducationEndDate: null,
+      newEducationDegree: "",
+      newEducationSchool: "",
+
+
+      newExperienceStartDate: null ,
+      newExperienceEndDate: null,
+      newExperienceTitle: "",
+      newExperienceCompany: "",
+      newExperienceDetails: "",
+
       errors: []
     };
   },
@@ -113,12 +130,60 @@ var ProfilePage = {
           }.bind(this)
         );
     },
+    dateTime: function(input){
+      if(input == "start_date" || input == "end_date"){
+        return true;
+      }else{
+        return false;
+      }
+    },
     output: function(input){
       if(input != "photo"){
         return true;
       }else{
         return false;
       }
+    },
+    newSkill: function(){
+      params = {
+        skill_name: this.newSkillName,
+        student_id: this.currentStudent.id
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
+    },
+    newEducation: function(){
+      params = {
+        start_date: this.newEducationStartDate,
+        end_date: this.newEducationEndDate,
+        degree: this.newEducationDegree,
+        school: this.newEducationSchool,
+        student_id: this.currentStudent.id
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
+    },
+    newExperience: function(){
+      params = {
+        start_date: this.newExperienceStartDate,
+        end_date: this.newExperienceEndDate,
+        title: this.newExperienceTitle,
+        details: this.newExperienceDetails,
+        company: this.newExperienceCompany,
+        student_id: this.currentStudent.id,
+
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
     }
   }
 };

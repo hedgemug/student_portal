@@ -124,6 +124,7 @@
       <br>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#educationsUpdateModal">Update Educations</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#addEducationModal">Add an Education</a>
     <h3>Experiences</h3>
     <div v-for="experience in experiences">
       <p>{{experience.title }}</p>
@@ -131,12 +132,118 @@
       <p>{{experience.details }}</p>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#experiencesUpdateModal">Update Experiences</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#addExperienceModal">Add an Experience</a>
     <h3>Skills</h3>
     <div v-for="skill in skills">
       <p>{{ skill.skill_name }}</p>
     </div>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#skillsUpdateModal">Update Skills</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#addSkillModal">Add a skill</a>
+
+    
+
+    <!-- Add Modals -->
+    <div class="modal fade" id="addEducationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" v-for="key in Object.keys(currentStudent)">
+            <div class="form-group">
+              <label> Start Date :</label> 
+              <input type="datetime-local" class="form-control" v-model="newEducationStartDate">
+            </div>
+            <div class="form-group">
+              <label> End Date :</label> 
+              <input type="datetime-local" class="form-control" v-model="newEducationEndDate">
+            </div>
+            <div class="form-group">
+              <label> Degree:</label> 
+              <input type="string" class="form-control" v-model="newEducationDegree">
+            </div>
+            <div class="form-group">
+              <label> School:</label> 
+              <input type="string" class="form-control" v-model="newEducationSchool">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="newEducation()" class="btn btn-secondary">Create the New Education</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="addSkillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="form-group">
+              <label>Skill Name:</label> 
+              <input type="string" class="form-control" v-model="newSkillName">
+            </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="newSkill()" class="btn btn-secondary">Create the New Skill</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addExperienceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Experience</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="form-group">
+              <label>Start Date:</label> 
+              <input type="datetime-local" class="form-control" v-model="newExperienceStartDate">
+            </div>
+            <div class="form-group">
+              <label>End Date:</label> 
+              <input type="datetime-local" class="form-control" v-model="newExperienceEndDate">
+            </div>
+            <div class="form-group">
+              <label>Title:</label> 
+              <input type="string" class="form-control" v-model="newExperienceDetails">
+            </div>
+            <div class="form-group">
+              <label>Company:</label> 
+              <input type="string" class="form-control" v-model="newExperienceCompany">
+            </div>
+            <div class="form-group">
+              <label>Details:</label> 
+              <input type="string" class="form-control" v-model="newExperienceDetails">
+            </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="newSkill()" class="btn btn-secondary">Create the New Skill</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Student Info Update -->
     <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,6 +259,7 @@
             <div class="form-group">
               <label>{{key + ": "}}</label> 
               <input type="string" class="form-control" v-model="currentStudent[key]">
+
             </div>
           </div>
           <div class="modal-footer">
@@ -178,8 +286,11 @@
             <p>Education</p>
             <div class="modal-body" v-for="key in Object.keys(school)">
               <div class="form-group">
+
                 <label>{{key + ": "}}</label> 
-                <input type="string" class="form-control" v-model="school[key]">
+                <input v-if="!dateTime(key)" type="string" class="form-control" v-model="school[key]">
+                <input v-if="dateTime(key)" type="datetime-local" class="form-control" v-model="school[key]">
+
               </div>
             </div>
           </div>
@@ -208,7 +319,8 @@
             <div class="modal-body" v-for="key in Object.keys(experience)">
               <div class="form-group">
                 <label>{{key + ": "}}</label> 
-                <input type="string" class="form-control" v-model="experience[key]">
+                <input v-if="!dateTime(key)" type="string" class="form-control" v-model="experience[key]">
+                <input v-if="dateTime(key)" type="datetime-local" class="form-control" v-model="experience[key]">
               </div>
             </div>
           </div>
