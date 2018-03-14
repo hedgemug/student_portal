@@ -108,7 +108,7 @@
       <p>{{experience.details }}</p>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#experiencesUpdateModal">Update Experiences</a>
-    <a class="btn btn-primary" data-toggle="modal" data-target="#addExperienceModal">Add an Education</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#addExperienceModal">Add an Experience</a>
     <h3>Skills</h3>
     <div v-for="skill in skills">
       <p>{{ skill.skill_name }}</p>
@@ -185,7 +185,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Experience</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -221,7 +221,6 @@
     </div>
 
 
-    <!-- Update Todo: Fix start time issues -->
     <!-- Student Info Update -->
     <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -236,6 +235,7 @@
             <div class="form-group">
               <label>{{key + ": "}}</label> 
               <input type="string" class="form-control" v-model="currentStudent[key]">
+
             </div>
           </div>
           <div class="modal-footer">
@@ -262,8 +262,11 @@
             <p>Education</p>
             <div class="modal-body" v-for="key in Object.keys(school)">
               <div class="form-group">
+
                 <label>{{key + ": "}}</label> 
-                <input type="string" class="form-control" v-model="school[key]">
+                <input v-if="!dateTime(key)" type="string" class="form-control" v-model="school[key]">
+                <input v-if="dateTime(key)" type="datetime-local" class="form-control" v-model="school[key]">
+
               </div>
             </div>
           </div>
@@ -292,7 +295,8 @@
             <div class="modal-body" v-for="key in Object.keys(experience)">
               <div class="form-group">
                 <label>{{key + ": "}}</label> 
-                <input type="string" class="form-control" v-model="experience[key]">
+                <input v-if="!dateTime(key)" type="string" class="form-control" v-model="experience[key]">
+                <input v-if="dateTime(key)" type="datetime-local" class="form-control" v-model="experience[key]">
               </div>
             </div>
           </div>

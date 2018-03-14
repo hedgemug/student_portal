@@ -115,6 +115,13 @@ var ProfilePage = {
           }.bind(this)
         );
     },
+    dateTime: function(input){
+      if(input == "start_date" || input == "end_date"){
+        return true;
+      }else{
+        return false;
+      }
+    },
     output: function(input){
       if(input != "photo"){
         return true;
