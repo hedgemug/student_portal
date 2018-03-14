@@ -132,7 +132,7 @@ var router = new VueRouter({
 
    { path: "/capstones/:id", component: CapstoneShowPage },
 
-   { path: "/profile", component: PorfilePage }
+   { path: "/profile", component: ProfilePage }
 
 
   ],
