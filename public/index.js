@@ -39,10 +39,21 @@ var ProfilePage = {
   template: "#profile-page",
   data: function() {
     return {
+      // Display Models
       currentStudent: {user_name: "Hello"},
       educations: [],
       experiences: [],
       skills: [],
+
+      // Add Models
+      newSkillName: "",
+
+      newEducationStartDate: "",
+      newEducationEndDate: "",
+      newEducationDegree: "",
+      newEducationSchool: "",
+
+
 
       errors: []
     };
@@ -93,6 +104,31 @@ var ProfilePage = {
       }else{
         return false;
       }
+    },
+    newSkill: function(){
+      params = {
+        skill_name: this.newSkillName,
+        student_id: this.currentStudent.id
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
+    },
+    newEducation: function(){
+      params = {
+        start_date: this.newEducationStartDate,
+        end_date: this.newEducationEndDate,
+        degree: this.newEducationDegree,
+        school: this.newEducationSchool,
+        student_id: this.currentStudent.id
+      }
+      axios.post("/skills", params).then(function(response){
+
+      }.bind(this)).catch(function(error){
+        this.erorrs = error.response.data.errors;
+      }.bind(this));
     }
   }
 };
