@@ -129,12 +129,8 @@ var ProfilePage = {
 var router = new VueRouter({
   routes: [
    { path: "/login", component: LoginPage },
-
    { path: "/capstones/:id", component: CapstoneShowPage },
-
    { path: "/profile", component: ProfilePage }
-
-
   ],
 
 
