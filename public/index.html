@@ -118,9 +118,10 @@
 
     <h1>Resume</h1>
     <h3>Education</h3>
-    <div v-for="education in educations">
+    <div v-for="education in educations" v-bind:key="education.id">
       <p>School: {{ education.school }}</p>
       <p>Degree: {{ education.degree }}</p>
+      <button v-on:click="deleteEducation(education)">Delete</button>
       <br>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#educationsUpdateModal">Update Educations</a>
@@ -130,12 +131,14 @@
       <p>{{experience.title }}</p>
       <p>{{experience.company }}</p>
       <p>{{experience.details }}</p>
+      <button v-on:click="deleteExperience(experience)">Delete</button>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#experiencesUpdateModal">Update Experiences</a>
     <a class="btn btn-primary" data-toggle="modal" data-target="#addExperienceModal">Add an Experience</a>
     <h3>Skills</h3>
     <div v-for="skill in skills">
-      <p>{{ skill.skill_name }}</p>
+      <p>{{ skill.skill_name }} <button v-on:click="deleteSkill(skill)">Delete</button></p>
+
     </div>
     </div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#skillsUpdateModal">Update Skills</a>

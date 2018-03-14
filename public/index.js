@@ -143,6 +143,7 @@ var ProfilePage = {
         return false;
       }
     },
+    // Add functionalities
     newSkill: function(){
       params = {
         skill_name: this.newSkillName,
@@ -183,6 +184,28 @@ var ProfilePage = {
       }.bind(this)).catch(function(error){
         this.erorrs = error.response.data.errors;
       }.bind(this));
+    },
+    // Delete functionalities
+    deleteEducation: function(education) {
+      var id = education.id 
+      axios.delete("/educations/" + id).then(function(response) {
+        var index = this.educations.indexOf(education);
+        this.educations.splice(index, 1);
+      }.bind(this))
+    },
+    deleteExperience: function(experience) {
+      var id = experience.id 
+      axios.delete("/experiences/" + id).then(function(response) {
+        var index = this.experiences.indexOf(experience);
+        this.experiences.splice(index, 1);
+      }.bind(this))
+    },
+    deleteSkill: function(skill) {
+      var id = skill.id 
+      axios.delete("/skills/" + id).then(function(response) {
+        var index = this.skills.indexOf(skill);
+        this.skills.splice(index, 1);
+      }.bind(this))
     }
   }
 };
